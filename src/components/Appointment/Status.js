@@ -9,7 +9,7 @@ export default function Status (props) {
         alt="Loading"
         onClick={props.onClose}
       />
-      <h1 className="text--semi-bold">{props.message}</h1>
+      <h1 className="text-`-semi-bold">{props.message}</h1>
     </main>
   );
 }
