@@ -5,8 +5,6 @@ import axios from "axios"
 
 import "components/Application.scss";
 
-
-
 const appointments = {
   "1": {
     id: 1,
@@ -48,13 +46,19 @@ const appointments = {
 
 export default function Application(props) {
 
-  const [days, setDays] = useState([]);
-  const [day, setDay] = useState("Monday");
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+  
+  const setDay = day => setState({ ...state, day });
+  const setDays = days => setState({ ...state, days });
+
+  
+
   useEffect(() => {
-    axios.get('http://localhost:8001/api/days')
-    .then((res) => {
-      setDays(res.data);
-    })
+    axios.get("/api/days").then(response => setDays(response.data));
   }, []);
 
   const appointmentArray = Object.values(appointments).map(appointment => <Appointment key={appointment.id} {...appointment} />) 
@@ -70,8 +74,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
           <DayList
-            days={days}
-            value={day}
+            days={state.days}
+            value={state.day}
             onChange={setDay}
           />
         </nav>
