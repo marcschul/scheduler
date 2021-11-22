@@ -64,6 +64,8 @@ function getAppointmentsForDay(state, day) {
 function getInterviewersForDay(state, day) {
   const currentDay = state.days.find(dayObj => dayObj.name === day)
 
+  console.log('currentDay ===', currentDay);
+
   if(!currentDay) {
     return [];
   }
@@ -72,15 +74,9 @@ function getInterviewersForDay(state, day) {
     return [];
   }
 
-  const appointmentArray = currentDay.appointments.map(id => state.appointments[id])
-  const interviewers = [];
-  for (let appointment of appointmentArray) {
-    if (appointment.interview) {
-      interviewers.push(state.interviewers[appointment.interview.interviewer]);
-    }
-  }
+  const interviewersArray = currentDay.interviewers.map(id => state.interviewers[id])
 
-  return interviewers;
+  return interviewersArray;
 }
 
 function getInterview (state, interview) {
