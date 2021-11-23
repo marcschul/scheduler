@@ -9,7 +9,7 @@ import "components/Application.scss";
 export default function Application(props) {
 
   const [state, setState] = useState({
-    day: "",
+    day: "Monday",
     days: [],
     appointments: {}
   });
