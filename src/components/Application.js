@@ -5,7 +5,6 @@ import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 import "components/Application.scss";
-import Show from "./Appointment/Show";
 
 export default function Application(props) {
 
