@@ -5,11 +5,12 @@ import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 import "components/Application.scss";
+import Show from "./Appointment/Show";
 
 export default function Application(props) {
 
   const [state, setState] = useState({
-    day: "Monday",
+    day: "",
     days: [],
     appointments: {}
   });
@@ -20,7 +21,7 @@ export default function Application(props) {
   const setDay = day => setState({ ...state, day });
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -29,11 +30,16 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({
-      ...state,
-      appointments
-    });
 
+    return axios.put(`/api/appointments/${appointment.id}`, appointment)
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        })
+      })
+    
+    
   }
 
   useEffect(() => {
