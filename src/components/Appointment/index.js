@@ -31,9 +31,14 @@ export default function Appointment(props) {
       .then(() => transition(SHOW));
   }
 
-  
-  function deleteAppointment() {
+  function confirm() {
     transition(CONFIRM)
+  }
+
+  function deleteAppointment() {
+    transition(DELETING)
+    props.cancelInterview(props.id)
+      .then(() => transition(EMPTY))
   }
 
   return (
@@ -49,7 +54,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer ? props.interview.interviewer.name : ""}
-          onDelete={deleteAppointment}
+          onDelete={confirm}
         />
       )}
       {mode === CREATE && (
@@ -72,11 +77,7 @@ export default function Appointment(props) {
       {mode === CONFIRM && (
         <Confirm 
           onCancel={back}
-          onConfirm={() => {
-            transition(DELETING)
-            props.cancelInterview(props.id)
-            .then(() => transition(EMPTY))
-          }}
+          onConfirm={deleteAppointment}
         />
       )}
       
