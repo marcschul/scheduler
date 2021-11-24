@@ -64,8 +64,6 @@ function getAppointmentsForDay(state, day) {
 function getInterviewersForDay(state, day) {
   const currentDay = state.days.find(dayObj => dayObj.name === day)
 
-  console.log('currentDay ===', currentDay);
-
   if(!currentDay) {
     return [];
   }
