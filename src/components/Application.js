@@ -19,6 +19,7 @@ export default function Application(props) {
 
   const setDay = day => setState({ ...state, day });
 
+  // Adds selected interview to API and Client's browser
   function bookInterview(id, interview) {
 
     const appointment = {
@@ -39,6 +40,7 @@ export default function Application(props) {
       })
   }
 
+  // Deletes selected interview from API and Client's Browser
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -57,6 +59,18 @@ export default function Application(props) {
           appointments
         })
       })
+  }
+
+  // Edit's selected interview in API and Client's browser
+  function editInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
   }
 
   useEffect(() => {
@@ -86,6 +100,7 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
+        editInterview={editInterview}
       />
     )
   });
