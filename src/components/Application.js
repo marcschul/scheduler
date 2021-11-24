@@ -61,18 +61,6 @@ export default function Application(props) {
       })
   }
 
-  // Edit's selected interview in API and Client's browser
-  function editInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-  }
-
   useEffect(() => {
     Promise.all([
       Promise.resolve(axios.get("http://localhost:8001/api/days")),
@@ -100,7 +88,6 @@ export default function Application(props) {
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
-        editInterview={editInterview}
       />
     )
   });

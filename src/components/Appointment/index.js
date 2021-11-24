@@ -42,9 +42,8 @@ export default function Appointment(props) {
       .then(() => transition(EMPTY))
   }
 
-  function edit(name, interviewer) {
+  function edit() {
     transition(EDIT)
-    props.editInterview();
   }
 
   return (
