@@ -23,7 +23,7 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
-    const days = update(-1);
+    const days = updateSpot(-1);
 
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
@@ -46,7 +46,7 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
-    const days = update(1);
+    const days = updateSpot(1);
 
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
@@ -58,7 +58,8 @@ export default function useApplicationData(props) {
       })
   }
 
-  const update = function(n) {
+  // updateSpot's the spot's state
+  const updateSpot = function(n) {
     const currentDay = state.day
 
     const days = state.days.map(day => {
