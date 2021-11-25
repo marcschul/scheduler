@@ -23,11 +23,14 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
+    const days = update(-1);
+
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState({
           ...state,
-          appointments
+          appointments,
+          days
         })
       })
   }
@@ -43,14 +46,29 @@ export default function useApplicationData(props) {
       [id]: appointment
     };
 
+    const days = update(1);
+
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        console.log('ok')
         setState({
           ...state, 
-          appointments
+          appointments,
+          days
         })
       })
+  }
+
+  const update = function(n) {
+    const currentDay = state.day
+
+    const days = state.days.map(day => {
+      if (day.name === currentDay) {
+        day.spots += n
+      }
+      return day;
+    });
+
+    return days;
   }
 
   useEffect(() => {
