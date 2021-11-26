@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 import "components/Appointment/styles.scss"
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
@@ -52,6 +52,15 @@ export default function Appointment(props) {
     transition(EDIT)
   }
 
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+     transition(SHOW);
+    }
+    if (props.interview === null && mode === SHOW) {
+     transition(EMPTY);
+    }
+   }, [props.interview, transition, mode]);
+
   return (
     <article 
       className="appointment">
@@ -61,9 +70,9 @@ export default function Appointment(props) {
       />
 
       {mode === EMPTY && <Empty onAdd={() => {transition(CREATE)}} />}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && (
         <Show
-          student={props.interview.student}
+          student={props.interview ? props.interview.student: ""}
           interviewer={props.interview.interviewer ? props.interview.interviewer.name : ""}
           onDelete={confirm}
           onEdit={edit}
@@ -96,8 +105,9 @@ export default function Appointment(props) {
         <Form
         interviewers={props.interviewers}
         onCancel={() => {back()}}
+        // need to edit to save function, causing bug that adds a spot
         onSave={save}
-        student={props.interview.student}
+        student={props.interview ? props.interview.student: ""}
         interviewer={props.interview.interviewer ? props.interview.interviewer.id : ""}
         />
       )}
