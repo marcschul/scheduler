@@ -16,7 +16,7 @@ function reducer(state, action) {
         ...state,
         days: action.value[0].data, 
         appointments: action.value[1].data,
-        interviewers: action.value[2].data  
+        interviewers: action.value[2].data
       }
     case SET_INTERVIEW: 
     { return {
@@ -83,9 +83,9 @@ export default function useApplicationData(props) {
 
   const fetchData = function () {
     return Promise.all([
-      Promise.resolve(axios.get("http://localhost:8001/api/days")),
-      Promise.resolve(axios.get("http://localhost:8001/api/appointments")),
-      Promise.resolve(axios.get("http://localhost:8001/api/interviewers")),
+      Promise.resolve(axios.get("/api/days")),
+      Promise.resolve(axios.get("/api/appointments")),
+      Promise.resolve(axios.get("/api/interviewers")),
     ])
   }
 
