@@ -62,7 +62,8 @@ export default function Appointment(props) {
    }, [props.interview, transition, mode]);
 
   return (
-    <article 
+    <article
+      data-testid="appointment"
       className="appointment">
 
       <Header 
