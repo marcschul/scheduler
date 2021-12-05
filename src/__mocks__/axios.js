@@ -84,7 +84,18 @@ export default {
   }),
   put: jest.fn(() => {
     const days = [...fixtures.days];
-    days[0].spots = 0;
+    days[0].spots--;
+
+    return Promise.resolve({
+      status: 204,
+      statusText: "No Content",
+      data: days
+    });
+  }),
+  delete: jest.fn((id) => {
+    const days = [...fixtures.days];
+    days[0].spots = 2;
+
 
     return Promise.resolve({
       status: 204,
